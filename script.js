@@ -3,12 +3,14 @@ const mobileToggle = document.getElementById('mobile-toggle');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('sidebar-overlay');
 const navLinks = document.querySelectorAll('.sidebar .nav-links a');
-const toggleIcon = mobileToggle.querySelector('i'); // جلب الأيقونة
+const toggleIcon = mobileToggle.querySelector('i');
+
+// زرار Get in Touch اللي في السايد بار
+const sidebarContactBtn = document.querySelector('.sidebar-contact-btn a');
 
 function closeSidebar() {
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
-    // إرجاع الأيقونة لشكل الـ Bars
     toggleIcon.classList.remove('fa-times');
     toggleIcon.classList.add('fa-bars');
 }
@@ -17,7 +19,6 @@ mobileToggle.addEventListener('click', () => {
     sidebar.classList.toggle('active');
     overlay.classList.toggle('active');
     
-    // تغيير الأيقونة بين Bars و Times
     if (sidebar.classList.contains('active')) {
         toggleIcon.classList.remove('fa-bars');
         toggleIcon.classList.add('fa-times');
@@ -28,7 +29,16 @@ mobileToggle.addEventListener('click', () => {
 });
 
 overlay.addEventListener('click', closeSidebar);
-navLinks.forEach(link => { link.addEventListener('click', closeSidebar); });
+
+// ده الجزء اللي بيقفل المنيو لما تدوس على أي لينك في القائمة
+navLinks.forEach(link => { 
+    link.addEventListener('click', closeSidebar); 
+});
+
+// السطر الجديد ده عشان يقفل المنيو لما تدوس على زرار Get in Touch
+if(sidebarContactBtn) {
+    sidebarContactBtn.addEventListener('click', closeSidebar);
+}
 
 // 2. Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
